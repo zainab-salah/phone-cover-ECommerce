@@ -2,7 +2,7 @@
 
 import { Progress } from '@/components/ui/progress'
 import { useToast } from '@/components/ui/use-toast'
-import { useUploadThing } from '@/lib/uploadthing'
+// import { useUploadThing } from '@/lib/uploadthing'
 import { cn } from '@/lib/utils'
 import { Image, Loader2, MousePointerSquareDashed } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -15,17 +15,17 @@ const Page = () => {
   const [uploadProgress, setUploadProgress] = useState<number>(0)
   const router = useRouter()
 
-  const { startUpload, isUploading } = useUploadThing('imageUploader', {
-    onClientUploadComplete: ([data]) => {
-      const configId = data.serverData.configId
-      startTransition(() => {
-        router.push(`/configure/design?id=${configId}`)
-      })
-    },
-    onUploadProgress(p) {
-      setUploadProgress(p)
-    },
-  })
+  // const { startUpload, isUploading } = useUploadThing('imageUploader', {
+  //   onClientUploadComplete: ([data]) => {
+  //     const configId = data.serverData.configId
+  //     startTransition(() => {
+  //       router.push(`/configure/design?id=${configId}`)
+  //     })
+  //   },
+  //   onUploadProgress(p) {
+  //     setUploadProgress(p)
+  //   },
+  // })
 
   const onDropRejected = (rejectedFiles: FileRejection[]) => {
     const [file] = rejectedFiles
@@ -40,7 +40,7 @@ const Page = () => {
   }
 
   const onDropAccepted = (acceptedFiles: File[]) => {
-    startUpload(acceptedFiles, { configId: undefined })
+    // startUpload(acceptedFiles, { configId: undefined })
 
     setIsDragOver(false)
   }
@@ -71,7 +71,7 @@ const Page = () => {
               className='h-full w-full flex-1 flex flex-col items-center justify-center'
               {...getRootProps()}>
               <input {...getInputProps()} />
-              {isDragOver ? (
+              {/* {isDragOver ? (
                 <MousePointerSquareDashed className='h-6 w-6 text-zinc-500 mb-2' />
               ) : isUploading || isPending ? (
                 <Loader2 className='animate-spin h-6 w-6 text-zinc-500 mb-2' />
@@ -101,7 +101,7 @@ const Page = () => {
                     drag and drop
                   </p>
                 )}
-              </div>
+              </div> */}
 
               {isPending ? null : (
                 <p className='text-xs text-zinc-500'>PNG, JPG, JPEG</p>
