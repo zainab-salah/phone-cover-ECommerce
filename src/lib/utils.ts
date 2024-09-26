@@ -36,3 +36,12 @@ export function constructMetadata({
     metadataBase: new URL("https://casecobra.vercel.app/")
   }
 }
+
+export const formatPrice = (price: number) => {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  })
+
+  return formatter.format(price)
+}
