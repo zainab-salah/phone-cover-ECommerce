@@ -7,6 +7,7 @@ import HandleComponent from "@/components/HandleComponent";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { RadioGroup } from "@headlessui/react";
 import { useRef, useState } from "react";
+
 import {
   COLORS,
   FINISHES,
@@ -23,8 +24,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, ChevronsUpDown } from "lucide-react";
 import { BASE_PRICE } from "@/config/products";
-import { toast } from "@/components/ui/use-toast";
-import { Toast } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
+
+import { useUploadThing } from "@/lib/uploadthing";
+import { useMutation } from "@tanstack/react-query";
+import { DesignArgs, saveConfig as _saveConfig } from "./actions";
+import { useRouter } from "next/navigation";
 
 type DesignConfiguratorProps = {
   imageUrl: string;
@@ -52,7 +57,7 @@ const DesignConfigurator = ({
     finish: FINISHES.options[0],
   });
 
-  const [renderedDimensions, setRenderedDimensions] = useState<Object>({
+  const [renderedDimensions, setRenderedDimensions] = useState({
     width: imageDimensions.width / 4,
     height: imageDimensions.height / 4,
   });
@@ -62,7 +67,29 @@ const DesignConfigurator = ({
   }>({ x: 150, y: 205 });
   const phoneCaseRef = useRef<HTMLDivElement>(null);
   const ContainerRef = useRef<HTMLDivElement>(null);
-  async function saveConfig() {
+
+  const { startUpload } = useUploadThing("imageUploader");
+  const { toast } = useToast();
+const router = useRouter();
+
+  const { mutate: saveConfig, isPending } = useMutation({
+    mutationKey: ["save-config"],
+    mutationFn: async (args: DesignArgs) => {
+      await Promise.all([saveConfiguration(), _saveConfig(args)]);
+    },
+    onError: () => {
+      toast({
+        title: "Something went wrong",
+        description: "There was an error on our end. Please try again.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      router.push(`/configure/preview?id=${configId}`);
+    },
+  });
+
+  async function saveConfiguration() {
     try {
       const {
         left: CaseLeft,
@@ -72,9 +99,53 @@ const DesignConfigurator = ({
       } = phoneCaseRef.current!.getBoundingClientRect();
       const { left: ContainerLeft, top: ContainerTop } =
         ContainerRef.current!.getBoundingClientRect();
-        const leftOffset = CaseLeft - ContainerLeft;
-        const topOffset = CaseTop - ContainerTop;
-    } catch (error) {}
+      const leftOffset = CaseLeft - ContainerLeft;
+      const topOffset = CaseTop - ContainerTop;
+
+      const actualX = renderedPosition.x - leftOffset;
+      const actualY = renderedPosition.y - topOffset;
+
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      const userImage = new Image();
+      userImage.crossOrigin = "anonymous";
+      userImage.src = imageUrl;
+      await new Promise((resolve) => (userImage.onload = resolve));
+      ctx?.drawImage(
+        userImage,
+        actualX,
+        actualY,
+        renderedDimensions.width,
+        renderedDimensions.height
+      );
+
+      //convert the canvas to a img
+      const base64 = canvas.toDataURL("image/png");
+      const base64Data = base64.split(",")[1];
+
+      const blob = base64toBlob(base64Data, "image/png");
+      const file = new File([blob], "filename.png", { type: "image/png" });
+
+      await startUpload([file], { configId });
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        description: "there was an error saving your design, please try again",
+        variant: "destructive",
+      });
+    }
+  }
+
+  function base64toBlob(base64: string, mimeType: string) {
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: mimeType });
   }
 
   return (
@@ -305,7 +376,17 @@ const DesignConfigurator = ({
                     100
                 )}
               </p>
-              <Button size="sm" className="w-full">
+              <Button size="sm" 
+              onClick={()=>{
+                saveConfig({
+                  color: option.color.value,
+                  finish: option.finish.value,
+                  model: option.model.value,
+                  material: option.material.value,
+                  configId,
+                });
+              }}
+              className="w-full">
                 Continue
                 <ArrowRight className="w-4 inline h-4 ml-1.5" />
               </Button>
