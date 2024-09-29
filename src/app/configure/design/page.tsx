@@ -14,7 +14,7 @@ const page = async ({ searchParams }: PageProps) => {
   if (!id || typeof id !== "string") {
     return notFound();
   }
-  const configuration = await db.configurations.findUnique({
+  const configuration = await db.configuration.findUnique({
     where: { id },
   });
   if (!configuration) {
