@@ -70,7 +70,7 @@ const DesignConfigurator = ({
 
   const { startUpload } = useUploadThing("imageUploader");
   const { toast } = useToast();
-const router = useRouter();
+  const router = useRouter();
 
   const { mutate: saveConfig, isPending } = useMutation({
     mutationKey: ["save-config"],
@@ -376,17 +376,19 @@ const router = useRouter();
                     100
                 )}
               </p>
-              <Button size="sm" 
-              onClick={()=>{
-                saveConfig({
-                  color: option.color.value,
-                  finish: option.finish.value,
-                  model: option.model.value,
-                  material: option.material.value,
-                  configId,
-                });
-              }}
-              className="w-full">
+              <Button
+                size="sm"
+                onClick={() => {
+                  saveConfig({
+                    color: option.color.value,
+                    finish: option.finish.value,
+                    model: option.model.value,
+                    material: option.material.value,
+                    configId,
+                  });
+                }}
+                className="w-full"
+              >
                 Continue
                 <ArrowRight className="w-4 inline h-4 ml-1.5" />
               </Button>
