@@ -4,7 +4,7 @@ import Phone from '@/components/Phone'
 import { Button } from '@/components/ui/button'
 import { BASE_PRICE, PRODUCT_PRICES } from '@/config/products'
 import { cn, formatPrice } from '@/lib/utils'
-import { COLORS,   MODELS } from '@/validators/option-validator'
+import { COLORS, FINISHES, MODELS } from '@/validators/option-validator'
 import { Configuration } from '@prisma/client'
 import { useMutation } from '@tanstack/react-query'
 import { ArrowRight, Check } from 'lucide-react'
@@ -24,10 +24,7 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false)
 
   const [showConfetti, setShowConfetti] = useState<boolean>(false)
-  useEffect(() => {
-    setShowConfetti(true);
-  }, []); // Add the empty array
-  
+  useEffect(() => setShowConfetti(true))
 
   const { color, model, finish, material } = configuration
 
@@ -60,7 +57,6 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
 
   const handleCheckout = () => {
     if (user) {
-      console.log(user)
       // create payment session
       createPaymentSession({ configId: id })
     } else {

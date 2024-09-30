@@ -45,3 +45,5 @@ export const formatPrice = (price: number) => {
 
   return formatter.format(price)
 }
+
+ 
