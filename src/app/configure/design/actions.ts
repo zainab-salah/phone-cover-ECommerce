@@ -1,31 +1,25 @@
-"use server";
+'use server'
 
-import { db } from "@/db";
-import {
-    CaseColor,
-    CaseFinish,
-    CaseMaterial,
-    PhoneModel,
-  
-  } from "@prisma/client";
+import { db } from '@/db'
+import { CaseColor, CaseFinish, CaseMaterial, PhoneModel } from '@prisma/client'
 
-export type DesignArgs = {
-    color: CaseColor;
-    finish: CaseFinish;
-    model: PhoneModel;
-    material: CaseMaterial;
-    configId: string;
-  };
-//rpc a remote procedure call
+export type SaveConfigArgs = {
+  color: CaseColor
+  finish: CaseFinish
+  material: CaseMaterial
+  model: PhoneModel
+  configId: string
+}
+
 export async function saveConfig({
   color,
   finish,
+  material,
   model,
   configId,
-  material,
-}: DesignArgs) {
+}: SaveConfigArgs) {
   await db.configuration.update({
     where: { id: configId },
-    data: { color, finish, model, material },
-  });
+    data: { color, finish, material, model },
+  })
 }
