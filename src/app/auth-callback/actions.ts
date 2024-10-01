@@ -14,7 +14,7 @@ export const getAuthStatus = async () => {
   const existingUser = await db.user.findFirst({
     where: { id: user.id },
   })
-console.log(existingUser)
+ 
   if (!existingUser) {
     await db.user.create({
       data: {
@@ -22,7 +22,7 @@ console.log(existingUser)
         email: user.email,
       },
     })
-    console.log("created user in db")
+ 
   }
 
   return { success: true }
