@@ -53,7 +53,7 @@ model Configuration {
 }
 
 model User {
-  id    String  @id  @unique
+    id    String  @id
 
   email String
   Order Order[]
