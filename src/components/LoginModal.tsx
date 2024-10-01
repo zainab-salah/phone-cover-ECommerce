@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from './ui/dialog'
 import Image from 'next/image'
-import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs'
+import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs/components'
 import { buttonVariants } from './ui/button'
 
 const LoginModal = ({
