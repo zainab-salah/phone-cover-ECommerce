@@ -15,6 +15,8 @@ export const getAuthStatus = async () => {
     where: { id: user.id },
   })
  
+
+  
   if (!existingUser) {
     await db.user.create({
       data: {
