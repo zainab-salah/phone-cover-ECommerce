@@ -96,7 +96,7 @@ function Review({ imgSrc, className, ...props }: ReviewProps) {
   return (
     <div
       className={cn(
-        'animate-fade-in rounded-[2.25rem] bg-white p-6 opacity-0 shadow-xl shadow-slate-900/5',
+        'animate-fade-in rounded-[2.25rem] bg-primarydark p-6 opacity-0 shadow-xl shadow-slate-900/5',
         className
       )}
       style={{ animationDelay }}
@@ -146,8 +146,8 @@ function ReviewGrid() {
           />
         </>
       ) : null}
-      <div className='pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-100' />
-      <div className='pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-100' />
+      <div className='pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-primarydark' />
+      <div className='pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-primarydark' />
     </div>
   )
 }
@@ -158,7 +158,7 @@ export function Reviews() {
       <img
         aria-hidden='true'
         src='/what-people-are-buying.png'
-        className='absolute select-none hidden xl:block -left-32 top-1/3'
+        className='absolute select-none hidden xl:block -left-36 top-1/3'
       />
 
       <ReviewGrid />
