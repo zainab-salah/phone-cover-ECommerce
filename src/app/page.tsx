@@ -4,11 +4,10 @@ import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
 import Phone from "@/components/Phone";
-import { Icons } from "@/components/Icons";
 import { Reviews } from "@/components/Reviews";
 export default function Home() {
   return (
-    <main className="bg-primarydark  overflow-x-hidden ">
+    <main className="bg-primarydark overflow-x-hidden ">
       <section className=" relative">
         <img src="/pomegranate1.png" className="absolute  left-0 bottom-0" />
 

@@ -46,11 +46,10 @@ const Page = () => {
   };
 
   const [isPending, startTransition] = useTransition();
-
   return (
     <div
       className={cn(
-        "relative h-full flex-1 my-16 w-full rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:rounded-2xl flex justify-center flex-col items-center",
+        "relative h-full flex-1 my-16 w-full rounded-xl bg-primarydark p-2 ring-1 ring-inset ring-gold lg:rounded-2xl flex justify-center flex-col items-center",
         {
           "ring-blue-900/25 bg-blue-900/10": isDragOver,
         }
@@ -75,19 +74,19 @@ const Page = () => {
             >
               <input {...getInputProps()} />
               {isDragOver ? (
-                <MousePointerSquareDashed className="h-6 w-6 text-zinc-500 mb-2" />
+                <MousePointerSquareDashed className="h-6 w-6 text-gold mb-2" />
               ) : isUploading || isPending ? (
-                <Loader2 className="animate-spin h-6 w-6 text-zinc-500 mb-2" />
+                <Loader2 className="animate-spin h-6 w-6 text-gold mb-2" />
               ) : (
-                <Image  className="h-6 w-6 text-zinc-500 mb-2" />
+                <Image className="h-6 w-6 text-gold mb-2" />
               )}
-              <div className="flex flex-col justify-center mb-2 text-sm text-zinc-700">
+              <div className="flex flex-col justify-center mb-2 text-sm text-white">
                 {isUploading ? (
                   <div className="flex flex-col items-center">
                     <p>Uploading...</p>
                     <Progress
                       value={uploadProgress}
-                      className="mt-2 w-40 h-2 bg-gray-300"
+                      className="mt-2 w-40 h-2 bg-gold"
                     />
                   </div>
                 ) : isPending ? (
@@ -107,7 +106,7 @@ const Page = () => {
               </div>
 
               {isPending ? null : (
-                <p className="text-xs text-zinc-500">PNG, JPG, JPEG</p>
+                <p className="text-xs text-gold">PNG, JPG, JPEG</p>
               )}
             </div>
           )}
