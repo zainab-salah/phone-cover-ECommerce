@@ -23,8 +23,8 @@ const LoginModal = ({
         <DialogHeader>
           <div className='relative mx-auto w-24 h-24 mb-2'>
             <Image
-              src='/snake-1.png'
-              alt='snake image'
+              src='/moonstar.png'
+              alt='moon image'
               className='object-contain'
               fill
             />
@@ -41,7 +41,7 @@ const LoginModal = ({
         </DialogHeader>
 
         <div className='grid grid-cols-2 gap-6 divide-x divide-gray-200'>
-          <LoginLink className={buttonVariants({ variant: 'outline' })}>
+          <LoginLink className={buttonVariants({ variant: 'outline', className: 'text-black' })}>
             Login
           </LoginLink>
           <RegisterLink className={buttonVariants({ variant: 'default' })}>

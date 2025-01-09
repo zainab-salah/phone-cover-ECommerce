@@ -75,8 +75,8 @@ const Page = async () => {
   const MONTHLY_GOAL = 2500
 
   return (
-    <div className='flex min-h-screen w-full bg-muted/40'>
-      <div className='max-w-7xl w-full mx-auto flex flex-col sm:gap-4 sm:py-4'>
+    <div className='flex min-h-screen w-full  text-black'>
+      <div className='max-w-7xl w-full mx-auto container flex flex-col sm:gap-4 sm:py-4'>
         <div className='flex flex-col gap-16'>
           <div className='grid gap-4 sm:grid-cols-2'>
             <Card>
@@ -97,7 +97,7 @@ const Page = async () => {
                 />
               </CardFooter>
             </Card>
-            <Card>
+            <Card className=''>
               <CardHeader className='pb-2'>
                 <CardDescription>Last Month</CardDescription>
                 <CardTitle className='text-4xl'>
@@ -117,17 +117,17 @@ const Page = async () => {
             </Card>
           </div>
 
-          <h1 className='text-4xl font-bold tracking-tight'>Incoming orders</h1>
+          <h1 className='text-4xl font-bold tracking-tight text-white'>Incoming orders</h1>
 
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Customer</TableHead>
-                <TableHead className='hidden sm:table-cell'>Status</TableHead>
-                <TableHead className='hidden sm:table-cell'>
+                <TableHead className='text-white'>Customer</TableHead>
+                <TableHead className='hidden sm:table-cell text-white'>Status</TableHead>
+                <TableHead className='hidden sm:table-cell text-white'>
                   Purchase date
                 </TableHead>
-                <TableHead className='text-right'>Amount</TableHead>
+                <TableHead className='text-right text-white'>Amount</TableHead>
               </TableRow>
             </TableHeader>
 
