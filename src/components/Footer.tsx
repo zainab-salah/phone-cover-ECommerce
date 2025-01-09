@@ -3,7 +3,7 @@ import MaxWidthWrapper from './MaxWidthWrapper'
 
 const Footer = () => {
   return (
-    <footer className='bg-primary h-20 relative'>
+    <footer className='bg-[#243F87] h-20 relative'>
       <MaxWidthWrapper>
         <div />
 

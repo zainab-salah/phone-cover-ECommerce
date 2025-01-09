@@ -8,16 +8,20 @@ const STEPS = [
     name: 'Step 1: Add image',
     description: 'Choose an image for your case',
     url: '/upload',
+    img: '/onestar.png',
   },
   {
     name: 'Step 2: Customize design',
     description: 'Make the case yours',
     url: '/design',
+    img: '/twostarts.png',
+    
   },
   {
     name: 'Step 3: Summary',
     description: 'Review your final design',
     url: '/preview',
+    img: '/moonstar.png',
   },
 ]
 
@@ -25,22 +29,23 @@ const Steps = () => {
   const pathname = usePathname()
 
   return (
-    <ol className='rounded-md bg-white lg:flex lg:rounded-none lg:border-l lg:border-r lg:border-gray-200'>
+    <ol className='  bg-primarydark text-white lg:flex lg:border-l lg:border-r lg:border-gray-200'>
       {STEPS.map((step, i) => {
         const isCurrent = pathname.endsWith(step.url)
         const isCompleted = STEPS.slice(i + 1).some((step) =>
           pathname.endsWith(step.url)
         )
-        const imgPath = `/snake-${i + 1}.png`
+        // const imgPath = `/snake-${i + 1}.png`
+      
 
         return (
           <li key={step.name} className='relative overflow-hidden lg:flex-1'>
             <div>
               <span
                 className={cn(
-                  'absolute left-0 top-0 h-full w-1 bg-zinc-400 lg:bottom-0 lg:top-auto lg:h-1 lg:w-full',
+                  'absolute left-0 top-0 h-full w-1 bg-gold/60 lg:bottom-0 lg:top-auto lg:h-1 lg:w-full',
                   {
-                    'bg-zinc-700': isCurrent,
+                    'bg-gold': isCurrent,
                     'bg-primary': isCompleted,
                   }
                 )}
@@ -54,12 +59,12 @@ const Steps = () => {
                 )}>
                 <span className='flex-shrink-0'>
                   <img
-                    src={imgPath}
+                    src={step.img}
                     className={cn(
-                      'flex h-20 w-20 object-contain items-center justify-center',
+                      'flex h-12 w-12 object-contain items-center justify-center',
                       {
                         'border-none': isCompleted,
-                        'border-zinc-700': isCurrent,
+                        'border-gold': isCurrent,
                       }
                     )}
                   />
@@ -67,13 +72,13 @@ const Steps = () => {
 
                 <span className='ml-4 h-full mt-0.5 flex min-w-0 flex-col justify-center'>
                   <span
-                    className={cn('text-sm font-semibold text-zinc-700', {
+                    className={cn('text-sm font-semibold text-white/90', {
                       'text-primary': isCompleted,
-                      'text-zinc-700': isCurrent,
+                      'text-gold': isCurrent,
                     })}>
                     {step.name}
                   </span>
-                  <span className='text-sm text-zinc-500'>
+                  <span className='text-sm text-white/80'>
                     {step.description}
                   </span>
                 </span>
