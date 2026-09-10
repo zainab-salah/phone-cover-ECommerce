@@ -1,6 +1,7 @@
 import { db } from '@/db'
 import { notFound } from 'next/navigation'
 import DesignPreview from './DesignPreview'
+import { getAuthSession } from '@/auth'
 
 interface PageProps {
   searchParams: Promise<{
@@ -23,7 +24,9 @@ const Page = async ({ searchParams }: PageProps) => {
     return notFound()
   }
 
-  return <DesignPreview configuration={configuration} />
+  const isAuthenticated = Boolean((await getAuthSession())?.user?.id)
+
+  return <DesignPreview configuration={configuration} isAuthenticated={isAuthenticated} />
 }
 
 export default Page
