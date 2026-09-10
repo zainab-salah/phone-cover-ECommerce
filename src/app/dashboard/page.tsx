@@ -50,9 +50,6 @@ const Page = async () => {
   const orders = await db.order.findMany({
     where: {
       isPaid: true,
-      createdAt: {
-        gte: new Date(new Date().setDate(new Date().getDate() - 7)),
-      },
     },
     orderBy: {
       createdAt: 'desc',
@@ -60,6 +57,7 @@ const Page = async () => {
     include: {
       user: true,
       shippingAddress: true,
+      configuration: true,
     },
   })
 
@@ -133,12 +131,13 @@ const Page = async () => {
             </Card>
           </div>
 
-          <h1 className='text-4xl font-bold tracking-tight text-white'>Incoming orders</h1>
+          <h1 className='text-4xl font-bold tracking-tight text-white'>Ordered covers</h1>
 
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead className='text-white'>Customer</TableHead>
+                <TableHead className='text-white'>Cover</TableHead>
                 <TableHead className='hidden sm:table-cell text-white'>Status</TableHead>
                 <TableHead className='hidden sm:table-cell text-white'>
                   Purchase date
@@ -156,6 +155,18 @@ const Page = async () => {
                     </div>
                     <div className='hidden text-sm text-muted-foreground md:inline'>
                       {order.user.email}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center gap-3'>
+                      <img
+                        src={order.configuration.croppedImageUrl ?? order.configuration.imageUrl}
+                        alt='Ordered phone case design'
+                        className='h-14 w-10 rounded-md border border-zinc-200 object-cover'
+                      />
+                      <span className='hidden font-medium sm:inline'>
+                        {order.configuration.model?.replace('iphone', 'iPhone ') ?? 'Custom case'}
+                      </span>
                     </div>
                   </TableCell>
                   <TableCell className='hidden sm:table-cell'>
