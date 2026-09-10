@@ -17,13 +17,12 @@ import {
 } from '@/components/ui/table'
 import { db } from '@/db'
 import { formatPrice } from '@/lib/utils'
-import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import { getAuthSession } from '@/auth'
 import { notFound } from 'next/navigation'
 import StatusDropdown from './StatusDropdown'
 
 const Page = async () => {
-  const { getUser } = getKindeServerSession()
-  const user = await getUser()
+  const user = (await getAuthSession())?.user
 
   const ADMIN_EMAIL = process.env.ADMIN_EMAIL
 

@@ -12,14 +12,14 @@ import Confetti from 'react-dom-confetti'
 import { createCheckoutSession } from './actions'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/components/ui/use-toast'
-import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs'
+import { useSession } from 'next-auth/react'
 import LoginModal from '@/components/LoginModal'
 
 const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   const router = useRouter()
   const { toast } = useToast()
   const { id } = configuration
-  const { user } = useKindeBrowserClient()
+  const { data: session } = useSession()
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false)
 
   const [showConfetti, setShowConfetti] = useState<boolean>(false)
@@ -55,10 +55,9 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
   })
  
   const handleCheckout = () => {
-    if (user) {
+    if (session?.user) {
       createPaymentSession({ configId: id })
     } else {
-      localStorage.setItem('configurationId', id)
       setIsLoginModalOpen(true)
     }
   }
@@ -74,7 +73,11 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
         />
       </div>
 
-      <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        setIsOpen={setIsLoginModalOpen}
+        callbackUrl={`/configure/preview?id=${id}`}
+      />
 
       <div className='mt-20 flex flex-col items-center md:grid text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12'>
         <div className='md:col-span-4 lg:col-span-3 md:row-span-2 md:row-end-2'>

@@ -1,7 +1,7 @@
 "use server"
 
 import { db } from '@/db'
-import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import { getAuthSession } from '@/auth'
 import { OrderStatus } from '@prisma/client'
 
 export const changeOrderStatus = async ({
@@ -11,8 +11,7 @@ export const changeOrderStatus = async ({
   id: string
   newStatus: OrderStatus
 }) => {
-  const { getUser } = getKindeServerSession()
-  const user = await getUser()
+  const user = (await getAuthSession())?.user
 
   if (!user?.email || user.email !== process.env.ADMIN_EMAIL) {
     throw new Error('Unauthorized')

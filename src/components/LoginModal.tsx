@@ -7,15 +7,17 @@ import {
   DialogTitle,
 } from './ui/dialog'
 import Image from 'next/image'
-import { LoginLink, RegisterLink } from '@kinde-oss/kinde-auth-nextjs/components'
 import { buttonVariants } from './ui/button'
+import Link from 'next/link'
 
 const LoginModal = ({
   isOpen,
   setIsOpen,
+  callbackUrl,
 }: {
   isOpen: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
+  callbackUrl: string
 }) => {
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
@@ -41,12 +43,12 @@ const LoginModal = ({
         </DialogHeader>
 
         <div className='grid grid-cols-2 gap-6 divide-x divide-gray-200'>
-          <LoginLink className={buttonVariants({ variant: 'outline', className: 'text-black' })}>
+          <Link href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`} className={buttonVariants({ variant: 'outline', className: 'text-black' })}>
             Login
-          </LoginLink>
-          <RegisterLink className={buttonVariants({ variant: 'default' })}>
+          </Link>
+          <Link href={`/register?callbackUrl=${encodeURIComponent(callbackUrl)}`} className={buttonVariants({ variant: 'default' })}>
             Sign up
-          </RegisterLink>
+          </Link>
         </div>
       </DialogContent>
     </Dialog>

@@ -3,7 +3,7 @@
 import { BASE_PRICE, PRODUCT_PRICES } from '@/config/products'
 import { db } from '@/db'
 import { stripe } from '@/lib/stripe'
-import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
+import { getAuthSession } from '@/auth'
 import { Order } from '@prisma/client'
 
 export const createCheckoutSession = async ({
@@ -19,8 +19,7 @@ export const createCheckoutSession = async ({
     throw new Error('No such configuration found')
   }
 
-  const { getUser } = getKindeServerSession()
-  const user = await getUser()
+  const user = (await getAuthSession())?.user
 
   if (!user) {
     throw new Error('You need to be logged in')
@@ -29,19 +28,6 @@ export const createCheckoutSession = async ({
     throw new Error('Invalid user data')
   }
 
-  const existingUser = await db.user.findFirst({
-    where: { id: user.id },
-  })
- 
-  if (!existingUser) {
-    await db.user.create({
-      data: {
-        id: user.id,
-        email: user.email,
-      },
-    })
- 
-  }
   const { finish, material } = configuration
 
   let price = BASE_PRICE

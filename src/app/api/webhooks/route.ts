@@ -89,7 +89,7 @@ export async function POST(req: Request) {
         },
       })
 
-      await resend.emails.send({
+      const { error } = await resend.emails.send({
         from: 'CaseCobra <kainyCase@gmail.com>',
         to: [event.data.object.customer_details.email],
         subject: 'Thanks for your order!',
@@ -107,6 +107,10 @@ export async function POST(req: Request) {
           },
         }),
       })
+
+      if (error) {
+        throw new Error(`Could not send order email: ${error.message}`)
+      }
     }
 
     return NextResponse.json({ result: event, ok: true })

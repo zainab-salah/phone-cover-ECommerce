@@ -25,6 +25,14 @@ const Page = () => {
     onUploadProgress(p) {
       setUploadProgress(p);
     },
+    onUploadError(error) {
+      setIsDragOver(false);
+      toast({
+        title: "Upload failed",
+        description: error.message || "Check your UploadThing configuration and try again.",
+        variant: "destructive",
+      });
+    },
   });
 
   const onDropRejected = (rejectedFiles: FileRejection[]) => {
