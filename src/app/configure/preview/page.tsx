@@ -28,6 +28,12 @@ const Page = async ({ searchParams }: PageProps) => {
   if (configuration.userId && configuration.userId !== user?.id) {
     return notFound()
   }
+  if (!configuration.userId && user?.id) {
+    await db.configuration.update({
+      where: { id: configuration.id },
+      data: { userId: user.id },
+    })
+  }
 
   const isAuthenticated = Boolean(user?.id)
 
