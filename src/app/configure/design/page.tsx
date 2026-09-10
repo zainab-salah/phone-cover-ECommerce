@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { notFound } from "next/navigation";
 import DesignConfigurator from "./DesignConfigurator";
+import { getAuthSession } from '@/auth'
 
 interface PageProps {
   searchParams: Promise<{
@@ -19,6 +20,10 @@ const page = async ({ searchParams }: PageProps) => {
   });
   if (!configuration) {
     return notFound();
+  }
+  const user = (await getAuthSession())?.user
+  if (configuration.userId && configuration.userId !== user?.id) {
+    return notFound()
   }
   const { imageUrl, width, height } = configuration;
   return (

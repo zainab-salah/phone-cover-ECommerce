@@ -28,6 +28,17 @@ export const createCheckoutSession = async ({
     throw new Error('Invalid user data')
   }
 
+  if (configuration.userId && configuration.userId !== user.id) {
+    throw new Error('This design belongs to another account')
+  }
+
+  if (!configuration.userId) {
+    await db.configuration.update({
+      where: { id: configuration.id },
+      data: { userId: user.id },
+    })
+  }
+
   const { finish, material } = configuration
 
   let price = BASE_PRICE

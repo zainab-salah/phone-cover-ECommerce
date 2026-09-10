@@ -18,16 +18,33 @@ import {
 import { db } from '@/db'
 import { formatPrice } from '@/lib/utils'
 import { getAuthSession } from '@/auth'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import StatusDropdown from './StatusDropdown'
+import CustomerDashboard from './CustomerDashboard'
 
 const Page = async () => {
   const user = (await getAuthSession())?.user
 
   const ADMIN_EMAIL = process.env.ADMIN_EMAIL
 
-  if (!user || user.email !== ADMIN_EMAIL) {
-    return notFound()
+  if (!user?.id) {
+    return redirect('/login?callbackUrl=/dashboard')
+  }
+
+  if (user.email !== ADMIN_EMAIL) {
+    const configurations = await db.configuration.findMany({
+      where: { userId: user.id },
+      orderBy: { updatedAt: 'desc' },
+      include: {
+        orders: {
+          select: { id: true, isPaid: true, status: true, amount: true, createdAt: true },
+          orderBy: { createdAt: 'desc' },
+          take: 1,
+        },
+      },
+    })
+
+    return <CustomerDashboard configurations={configurations} />
   }
 
   const orders = await db.order.findMany({

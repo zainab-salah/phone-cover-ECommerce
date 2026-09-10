@@ -24,7 +24,12 @@ const Page = async ({ searchParams }: PageProps) => {
     return notFound()
   }
 
-  const isAuthenticated = Boolean((await getAuthSession())?.user?.id)
+  const user = (await getAuthSession())?.user
+  if (configuration.userId && configuration.userId !== user?.id) {
+    return notFound()
+  }
+
+  const isAuthenticated = Boolean(user?.id)
 
   return <DesignPreview configuration={configuration} isAuthenticated={isAuthenticated} />
 }

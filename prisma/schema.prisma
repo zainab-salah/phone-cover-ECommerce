@@ -41,6 +41,8 @@ enum CaseColor {
 
 model Configuration {
   id              String        @id @default(cuid())
+  userId          String?
+  user            User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
   width           Int
   height          Int
   imageUrl        String
@@ -49,7 +51,9 @@ model Configuration {
   material        CaseMaterial?
   finish          CaseFinish?
   croppedImageUrl String?
-  Order           Order[]
+  orders          Order[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @default(now()) @updatedAt
 }
 
 model User {
@@ -60,7 +64,8 @@ model User {
   passwordHash String?
   accounts     Account[]
   sessions     Session[]
-  Order        Order[]
+  orders       Order[]
+  configurations Configuration[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
