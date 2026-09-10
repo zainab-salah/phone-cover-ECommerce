@@ -11,7 +11,7 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 export async function POST(req: Request) {
   try {
     const body = await req.text()
-    const signature = headers().get('stripe-signature')
+    const signature = (await headers()).get('stripe-signature')
 
     if (!signature) {
       return new Response('Invalid signature', { status: 400 })
@@ -39,8 +39,22 @@ export async function POST(req: Request) {
         throw new Error('Invalid request metadata')
       }
 
+      const order = await db.order.findUnique({ where: { id: orderId } })
+
+      if (!order) {
+        throw new Error('Order not found')
+      }
+
+      if (order.isPaid) {
+        return NextResponse.json({ ok: true })
+      }
+
       const billingAddress = session.customer_details!.address
       const shippingAddress = session.shipping_details!.address
+
+      if (!shippingAddress || !session.customer_details?.name) {
+        throw new Error('Missing shipping details')
+      }
 
       const updatedOrder = await db.order.update({
         where: {
@@ -58,16 +72,20 @@ export async function POST(req: Request) {
               state: shippingAddress!.state,
             },
           },
-          billingAddress: {
-            create: {
-              name: session.customer_details!.name!,
-              city: billingAddress!.city!,
-              country: billingAddress!.country!,
-              postalCode: billingAddress!.postal_code!,
-              street: billingAddress!.line1!,
-              state: billingAddress!.state,
-            },
-          },
+          ...(billingAddress
+            ? {
+                billingAddress: {
+                  create: {
+                    name: session.customer_details.name,
+                    city: billingAddress.city ?? '',
+                    country: billingAddress.country ?? '',
+                    postalCode: billingAddress.postal_code ?? '',
+                    street: billingAddress.line1 ?? '',
+                    state: billingAddress.state,
+                  },
+                },
+              }
+            : {}),
         },
       })
 

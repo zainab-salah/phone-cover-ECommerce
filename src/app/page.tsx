@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main className="bg-primarydark overflow-x-hidden ">
       <section className=" relative">
-        <img src="/pomegranate1.png" className="absolute  left-0 bottom-0" />
+        <img alt="" src="/pomegranate1.png" className="absolute  left-0 bottom-0" />
 
         <MaxWidthWrapper className="pb-24  pt-10 lg:grid lg:grid-cols-5 justify-between sm:pb-32 lg:gap-x-0 xl:gap-x-8 lg:pt-24 xl:pt-32 lg:pb-52">
           <div className="col-span-4 px-6 lg:px-0 lg:pt-4">
@@ -85,8 +85,9 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-              <img src="/onestar.png" className="absolute -left-20 bottom-10" />
+              <img alt="" src="/onestar.png" className="absolute -left-20 bottom-10" />
               <img
+                alt=""
                 src="/moonstar.png"
                 className="absolute w-[100px] right-28 bottom-20"
               />
@@ -96,6 +97,7 @@ export default function Home() {
           <div className="col-span-full relative lg:col-span-1 w-full flex justify-center px-8 sm:px-16 md:px-0 mt-52 lg:mx-0 lg:mt-28 h-fit">
             <div className="relative md:max-w-xl">
               <img
+                alt=""
                 src="/twostarts.png"
                 className="absolute w-[98px]  right-60 -top-40 select-none hidden sm:block lg:hidden xl:block"
               />
@@ -106,12 +108,14 @@ export default function Home() {
                 Painting
               </p>
               <img
+                alt=""
                 src="/line.png"
                 className="absolute  -right-20 -top-6 select-none"
               />
               <Phone className="w-64" imgSrc="/paintingclip.png" />
             </div>
             <img
+              alt=""
               src="/pomegranate.png"
               className="absolute  -right-40 -bottom-20 select-none"
             />
@@ -122,11 +126,13 @@ export default function Home() {
         
       <img
         aria-hidden='true'
+        alt=''
         src='/twostarts.png'
         className='absolute select-none hidden xl:block right-20 top-10'
       />
         <img
         aria-hidden='true'
+        alt=''
         src='/pomegranatestar.png'
         className='absolute select-none hidden xl:block right-0 -bottom-28'
       />
@@ -135,16 +141,18 @@ export default function Home() {
       <section className=" relative">
       <img
         aria-hidden='true'
+        alt=''
         src='/twostarts.png'
         className='absolute select-none hidden xl:block right-52 bottom-32'
       />
         <img
         aria-hidden='true'
+        alt=''
         src='/pomegranate.png'
         className='absolute select-none hidden xl:block left-0 bottom-10'
       />
         <MaxWidthWrapper className="py-24 relative">
-          <img src="moonstar.png" className="absolute -left-10 top-32" />
+          <img alt="" src="moonstar.png" className="absolute -left-10 top-32" />
           <div className="mb-12 px-6 lg:px-8">
             <div className="mx-auto max-w-2xl sm:text-center">
               <h2 className="order-1 mt-2 tracking-tight text-center text-balance !leading-tight font-bold text-5xl md:text-6xl text-white">
@@ -160,12 +168,14 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <div className="relative flex flex-col items-center md:grid grid-cols-2 gap-40">
               <img
+                alt=""
                 src="/arrow.png"
                 className="absolute top-[25rem] md:top-1/2 -translate-y-1/2 z-10 left-1/2 -translate-x-1/2 rotate-90 md:rotate-0"
               />
 
               <div className="relative h-80 md:h-full w-full md:justify-self-end max-w-sm rounded-xl bg-gray-900/5 ring-inset ring-gray-900/10 lg:rounded-2xl">
                 <img
+                  alt="Example custom phone case"
                   src="/fullpainting.png"
                   className="rounded-md object-cover border-white border-[20px] rounded-[2rem] shadow-2xl h-full w-full"
                 />

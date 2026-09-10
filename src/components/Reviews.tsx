@@ -157,6 +157,7 @@ export function Reviews() {
     <MaxWidthWrapper className='relative max-w-5xl'>
       <img
         aria-hidden='true'
+        alt=''
         src='/what-people-are-buying.png'
         className='absolute select-none hidden xl:block -left-36 top-1/3'
       />

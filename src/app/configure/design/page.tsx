@@ -3,14 +3,14 @@ import { notFound } from "next/navigation";
 import DesignConfigurator from "./DesignConfigurator";
 
 interface PageProps {
-  searchParams: {
+  searchParams: Promise<{
     [key: string]: string | string[] | undefined;
-  };
+  }>;
 }
 
 const page = async ({ searchParams }: PageProps) => {
   //make the db call
-  const { id } = searchParams;
+  const { id } = await searchParams;
   if (!id || typeof id !== "string") {
     return notFound();
   }
