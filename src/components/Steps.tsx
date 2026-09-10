@@ -29,7 +29,7 @@ const Steps = () => {
   const pathname = usePathname()
 
   return (
-    <ol className='  bg-primarydark text-white lg:flex lg:border-l lg:border-r lg:border-gray-200'>
+    <ol className='  bg-primarydark text-white lg:flex lg:border-l lg:border-r lg:border-border'>
       {STEPS.map((step, i) => {
         const isCurrent = pathname.endsWith(step.url)
         const isCompleted = STEPS.slice(i + 1).some((step) =>
@@ -89,7 +89,7 @@ const Steps = () => {
               {i !== 0 ? (
                 <div className='absolute inset-0 hidden w-3 lg:block'>
                   <svg
-                    className='h-full w-full text-gray-300'
+                    className='h-full w-full text-border'
                     viewBox='0 0 12 82'
                     fill='none'
                     preserveAspectRatio='none'>

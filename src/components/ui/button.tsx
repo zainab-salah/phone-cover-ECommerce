@@ -10,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-white text-primary shadow hover:bg-white/90',
+          'bg-gold text-primarydark shadow-sm hover:bg-[#e3b458]',
         destructive:
           'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
         outline:
-          'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+          'border border-input bg-card text-card-foreground shadow-sm hover:bg-accent hover:text-accent-foreground',
         secondary:
           'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
@@ -61,13 +61,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        {...props}>
+        {...props}
+        disabled={props.disabled || isLoading}
+        aria-busy={isLoading || undefined}>
         {isLoading && loadingText ? loadingText : children}
         {isLoading ? (
           <span className='ml-1.5 flex items-center gap-1'>
-            <span className='animate-flashing w-1 h-1 bg-white rounded-full inline-block' />
-            <span className='animate-flashing delay-100 w-1 h-1 bg-white rounded-full inline-block' />
-            <span className='animate-flashing delay-200 w-1 h-1 bg-white rounded-full inline-block' />
+            <span className='animate-flashing w-1 h-1 bg-current rounded-full inline-block' />
+            <span className='animate-flashing delay-100 w-1 h-1 bg-current rounded-full inline-block' />
+            <span className='animate-flashing delay-200 w-1 h-1 bg-current rounded-full inline-block' />
           </span>
         ) : null}
       </Comp>

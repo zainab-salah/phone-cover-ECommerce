@@ -34,11 +34,11 @@ export default function ForgotPasswordForm() {
   return (
     <main className='mx-auto flex min-h-[calc(100vh-3.5rem)] w-full max-w-md flex-col justify-center px-6 py-12 text-white'>
       <h1 className='text-3xl font-bold'>Reset your password</h1>
-      <p className='mt-2 text-zinc-300'>Enter your email and we will send you a reset link.</p>
+      <p className='mt-2 text-muted-foreground'>Enter your email and we will send you a reset link.</p>
       <form onSubmit={form.handleSubmit(onSubmit)} className='mt-8 space-y-4' noValidate>
         <label className='block'>
           <span className='text-sm'>Email</span>
-          <input {...form.register('email')} type='email' className='mt-1 w-full rounded-md border border-zinc-500 bg-white px-3 py-2 text-black' />
+          <input {...form.register('email')} type='email' className='mt-1 w-full rounded-md border border-input bg-card px-3 py-2 text-foreground' />
           {form.formState.errors.email ? <p className='mt-1 text-sm text-red-300'>{form.formState.errors.email.message}</p> : null}
         </label>
         {rootError ? <p className={`text-sm ${rootError.type === 'success' ? 'text-green-300' : 'text-red-300'}`}>{rootError.message}</p> : null}

@@ -1,6 +1,8 @@
-# Custom Phone Case Store
+# BSMA Case
 
-A small e-commerce app for creating a custom phone case, paying with Stripe, and tracking orders from a private dashboard. Customers can create an email/password account or sign in with Google when Google OAuth is configured.
+A dark, moonlit home for BSMA’s art and custom phone cases. Browse the gallery, choose a painting or upload your own image, save a draft, and check out with Stripe.
+
+Artwork titles and images come from [BSMA’s portfolio](https://walkthroughs-decide-801498.framer.app/). The collection lives in `src/config/artworks.ts`; owner-supplied poetry lives in `src/config/poems.ts`. Images are served from the original portfolio CDN. Choosing a gallery piece reuses that image instead of uploading another original.
 
 ## Run it locally
 
@@ -10,6 +12,10 @@ A small e-commerce app for creating a custom phone case, paying with Stripe, and
 4. Start the app with `npm run dev`, then open [http://localhost:3000](http://localhost:3000).
 
 Uploads require an `UPLOADTHING_TOKEN` from the UploadThing dashboard. Add it to `.env` before testing the case customizer.
+
+Use `npx tsc --noEmit --incremental false` and `npm run lint` for checks while developing. Stop the dev server before `npm run build` because both use `.next`.
+
+Search and sharing metadata use the production URL in `src/lib/utils.ts`. The site includes artwork URLs, a sitemap, a moon favicon, and a generated sharing poster at `/opengraph-image`.
 
 ## Google login
 

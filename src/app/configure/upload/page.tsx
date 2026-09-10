@@ -8,6 +8,7 @@ import { Image as ImageIcon, Loader2, MousePointerSquareDashed } from "lucide-re
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import Dropzone, { FileRejection } from "react-dropzone";
+import Link from 'next/link';
 
 const Page = () => {
   const { toast } = useToast();
@@ -64,7 +65,16 @@ const Page = () => {
       )}
     >
       <div className="relative flex flex-1 flex-col items-center justify-center w-full">
+        <div className='px-6 py-8 text-center'>
+          <p className='eyebrow'>Make something personal</p>
+          <h1 className='mt-3 text-4xl'>Your next little world.</h1>
+          <p className='mt-3 text-sm text-zinc-300'>Upload your own image, or <Link href='/gallery' className='underline underline-offset-4 text-[#d5ab5d]'>choose a painting from the gallery</Link>.</p>
+        </div>
         <Dropzone
+          multiple={false}
+          maxFiles={1}
+          maxSize={4 * 1024 * 1024}
+          disabled={isUploading || isPending}
           onDropRejected={onDropRejected}
           onDropAccepted={onDropAccepted}
           accept={{

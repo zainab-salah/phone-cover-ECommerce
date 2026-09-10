@@ -21,7 +21,7 @@ const LoginModal = ({
 }) => {
   return (
     <Dialog onOpenChange={setIsOpen} open={isOpen}>
-      <DialogContent className='absolute z-[9999999]'>
+      <DialogContent>
         <DialogHeader>
           <div className='relative mx-auto w-24 h-24 mb-2'>
             <Image
@@ -31,11 +31,11 @@ const LoginModal = ({
               fill
             />
           </div>
-          <DialogTitle className='text-3xl text-center font-bold tracking-tight text-gray-900'>
+          <DialogTitle className='text-3xl text-center font-bold tracking-tight text-foreground'>
             Log in to continue
           </DialogTitle>
           <DialogDescription className='text-base text-center py-2'>
-            <span className='font-medium text-zinc-900'>
+            <span className='font-medium text-foreground'>
               Your configuration was saved!
             </span>{' '}
             Please login or create an account to complete your purchase.
@@ -43,7 +43,7 @@ const LoginModal = ({
         </DialogHeader>
 
         <div className='grid grid-cols-2 gap-6 divide-x divide-gray-200'>
-          <Link href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`} className={buttonVariants({ variant: 'outline', className: 'text-black' })}>
+          <Link href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`} className={buttonVariants({ variant: 'outline', className: 'text-foreground' })}>
             Login
           </Link>
           <Link href={`/register?callbackUrl=${encodeURIComponent(callbackUrl)}`} className={buttonVariants({ variant: 'default' })}>

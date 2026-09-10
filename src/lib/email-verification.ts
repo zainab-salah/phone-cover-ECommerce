@@ -21,9 +21,9 @@ export async function sendVerificationEmail(user: { email: string; name?: string
   verifyUrl.searchParams.set('token', rawToken)
 
   const { error } = await new Resend(process.env.RESEND_API_KEY).emails.send({
-    from: process.env.EMAIL_FROM ?? 'KainyCase <onboarding@resend.dev>',
+    from: process.env.EMAIL_FROM ?? 'BSMA Case <onboarding@resend.dev>',
     to: user.email,
-    subject: 'Verify your KainyCase email',
+    subject: 'Verify your BSMA Case email',
     react: VerifyEmail({ name: user.name, verifyUrl: verifyUrl.toString() }),
   })
 

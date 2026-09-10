@@ -37,10 +37,10 @@ export async function POST(request: Request) {
 
     const resend = new Resend(process.env.RESEND_API_KEY)
     const { error } = await resend.emails.send({
-      from: process.env.EMAIL_FROM ?? 'KainyCase <onboarding@resend.dev>',
+      from: process.env.EMAIL_FROM ?? 'BSMA Case <onboarding@resend.dev>',
       to: email,
-      subject: 'Reset your KainyCase password',
-      html: `<p>We received a request to reset your KainyCase password.</p><p><a href="${resetUrl.toString()}">Reset your password</a></p><p>This link expires in one hour. If you did not request it, you can ignore this email.</p>`,
+      subject: 'Reset your BSMA Case password',
+      html: `<p>We received a request to reset your BSMA Case password.</p><p><a href="${resetUrl.toString()}">Reset your password</a></p><p>This link expires in one hour. If you did not request it, you can ignore this email.</p>`,
     })
 
     if (error) {

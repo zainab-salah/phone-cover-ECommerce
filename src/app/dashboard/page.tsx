@@ -89,7 +89,7 @@ const Page = async () => {
   const MONTHLY_GOAL = 2500
 
   return (
-    <div className='flex min-h-screen w-full  text-black'>
+    <div className='flex min-h-screen w-full  text-foreground'>
       <div className='max-w-7xl w-full mx-auto container flex flex-col sm:gap-4 sm:py-4'>
         <div className='flex flex-col gap-16'>
           <div className='grid gap-4 sm:grid-cols-2'>
@@ -162,7 +162,7 @@ const Page = async () => {
                       <img
                         src={order.configuration.croppedImageUrl ?? order.configuration.imageUrl}
                         alt='Ordered phone case design'
-                        className='h-14 w-10 rounded-md border border-zinc-200 object-cover'
+                        className='h-14 w-10 rounded-md border border-border object-cover'
                       />
                       <span className='hidden font-medium sm:inline'>
                         {order.configuration.model?.replace('iphone', 'iPhone ') ?? 'Custom case'}

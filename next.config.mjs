@@ -4,6 +4,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'utfs.io' },
       { protocol: 'https', hostname: 'ams8gpdtcg.ufs.sh' },
+      { protocol: 'https', hostname: 'framerusercontent.com', pathname: '/images/**' },
     ],
   },
 }

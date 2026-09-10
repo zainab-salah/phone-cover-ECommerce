@@ -6,34 +6,30 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export const SITE_URL = 'https://phonekainy.vercel.app'
+export const SITE_DESCRIPTION = 'Discover BSMA’s moonlit paintings and turn your favourite artwork into a custom iPhone case. Explore the gallery, personalise your design, and carry a little art.'
+
 export function constructMetadata({
-  title = 'CaseCobra - custom high-quality phone cases',
-  description = 'Create custom high-quality phone cases in seconds',
-  image = '/thumbnail.png',
-  icons = '/favicon.ico',
+  title = 'BSMA Case | Art to carry, worlds to keep',
+  description = SITE_DESCRIPTION,
+  image = '/opengraph-image',
+  icons = '/icon.svg',
+  path = '/',
 }: {
   title?: string
   description?: string
   image?: string
   icons?: string
+  path?: string
 } = {}): Metadata {
   return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      images: [{ url: image }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [image],
-      creator: '@joshtriedcoding',
-    },
+    metadataBase: new URL(SITE_URL),
+    title, description,
+    alternates: { canonical: path },
+    applicationName: 'BSMA Case',
+    openGraph: { title, description, url: path, siteName: 'BSMA Case', type: 'website', locale: 'en_US', images: [{ url: image, alt: title }] },
+    twitter: { card: 'summary_large_image', title, description, images: [image] },
     icons,
-    metadataBase: new URL("https://casecobra.vercel.app/")
   }
 }
 

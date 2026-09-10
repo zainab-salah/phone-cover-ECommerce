@@ -16,7 +16,7 @@ export default function CustomerDashboard({ configurations }: { configurations: 
         <div>
           <p className='text-sm font-medium uppercase tracking-[0.2em] text-gold'>My account</p>
           <h1 className='mt-2 text-4xl font-bold tracking-tight'>My cases</h1>
-          <p className='mt-3 max-w-xl text-zinc-300'>Your unfinished designs and order history are saved here.</p>
+          <p className='mt-3 max-w-xl text-muted-foreground'>Your unfinished designs and order history are saved here.</p>
         </div>
         <Link href='/configure/upload' className={buttonVariants({ className: 'w-fit' })}>
           Create a case <ArrowRight className='ml-1.5 h-4 w-4' />
@@ -24,10 +24,10 @@ export default function CustomerDashboard({ configurations }: { configurations: 
       </div>
 
       {configurations.length === 0 ? (
-        <div className='mt-10 rounded-2xl border border-gold/30 bg-white/5 px-6 py-14 text-center'>
+        <div className='mt-10 rounded-2xl border border-gold/30 bg-card px-6 py-14 text-center'>
           <PackageOpen className='mx-auto h-10 w-10 text-gold' />
           <h2 className='mt-4 text-xl font-semibold'>No saved cases yet</h2>
-          <p className='mt-2 text-zinc-300'>Create a case and it will appear here while you work.</p>
+          <p className='mt-2 text-muted-foreground'>Create a case and it will appear here while you work.</p>
         </div>
       ) : (
         <div className='mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3'>
@@ -40,7 +40,7 @@ export default function CustomerDashboard({ configurations }: { configurations: 
               : `/configure/design?id=${configuration.id}`
 
             return (
-              <article key={configuration.id} className='overflow-hidden rounded-2xl border border-white/15 bg-white/5'>
+              <article key={configuration.id} className='overflow-hidden rounded-2xl border border-border bg-card'>
                 <img
                   src={configuration.croppedImageUrl ?? configuration.imageUrl}
                   alt='Saved phone case design'
@@ -53,11 +53,11 @@ export default function CustomerDashboard({ configurations }: { configurations: 
                       {isPaid ? 'Ordered' : latestOrder ? 'Checkout ready' : 'Draft'}
                     </span>
                   </div>
-                  <p className='mt-3 text-sm text-zinc-300'>Last saved {configuration.updatedAt.toLocaleDateString()}</p>
+                  <p className='mt-3 text-sm text-muted-foreground'>Last saved {configuration.updatedAt.toLocaleDateString()}</p>
                   {latestOrder ? (
-                    <p className='mt-1 text-sm text-zinc-300'>Order {latestOrder.isPaid ? 'paid' : 'total'}: {formatPrice(latestOrder.amount)}</p>
+                    <p className='mt-1 text-sm text-muted-foreground'>Order {latestOrder.isPaid ? 'paid' : 'total'}: {formatPrice(latestOrder.amount)}</p>
                   ) : null}
-                  <Link href={continueUrl} className={buttonVariants({ variant: 'outline', className: 'mt-5 w-full text-black' })}>
+                  <Link href={continueUrl} className={buttonVariants({ variant: 'outline', className: 'mt-5 w-full text-foreground' })}>
                     {isPaid ? 'View design' : 'Continue editing'} <Pencil className='ml-1.5 h-4 w-4' />
                   </Link>
                 </div>

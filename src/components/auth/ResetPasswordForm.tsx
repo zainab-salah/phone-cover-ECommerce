@@ -46,12 +46,12 @@ export default function ResetPasswordForm({ token }: { token: string }) {
       <form onSubmit={form.handleSubmit(onSubmit)} className='mt-8 space-y-4' noValidate>
         <label className='block'>
           <span className='text-sm'>New password</span>
-          <input {...form.register('password')} type='password' className='mt-1 w-full rounded-md border border-zinc-500 bg-white px-3 py-2 text-black' />
+          <input {...form.register('password')} type='password' className='mt-1 w-full rounded-md border border-input bg-card px-3 py-2 text-foreground' />
           {form.formState.errors.password ? <p className='mt-1 text-sm text-red-300'>{form.formState.errors.password.message}</p> : null}
         </label>
         <label className='block'>
           <span className='text-sm'>Confirm password</span>
-          <input {...form.register('confirmPassword')} type='password' className='mt-1 w-full rounded-md border border-zinc-500 bg-white px-3 py-2 text-black' />
+          <input {...form.register('confirmPassword')} type='password' className='mt-1 w-full rounded-md border border-input bg-card px-3 py-2 text-foreground' />
           {form.formState.errors.confirmPassword ? <p className='mt-1 text-sm text-red-300'>{form.formState.errors.confirmPassword.message}</p> : null}
         </label>
         {form.formState.errors.root ? <p className='text-sm text-red-300'>{form.formState.errors.root.message}</p> : null}

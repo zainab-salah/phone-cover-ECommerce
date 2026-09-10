@@ -3,10 +3,10 @@ import { Button, Container, Heading, Html, Preview, Section, Text } from '@react
 export default function VerifyEmail({ name, verifyUrl }: { name?: string | null; verifyUrl: string }) {
   return (
     <Html>
-      <Preview>Verify your KainyCase email address</Preview>
+      <Preview>Verify your BSMA Case email address</Preview>
       <Section style={main}>
         <Container style={card}>
-          <Heading style={heading}>Welcome to KainyCase</Heading>
+          <Heading style={heading}>Welcome to BSMA Case</Heading>
           <Text style={text}>Hi{name ? ` ${name}` : ''},</Text>
           <Text style={text}>Thanks for creating an account. Please verify your email address to keep your account secure and receive order updates.</Text>
           <Button href={verifyUrl} style={button}>Verify my email</Button>

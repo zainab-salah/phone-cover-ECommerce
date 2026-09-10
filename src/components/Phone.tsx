@@ -10,7 +10,7 @@ const Phone = ({ imgSrc, className, dark = false, ...props }: PhoneProps) => {
   return (
     <div
       className={cn(
-        'relative pointer-events-none z-50 border-white border-[20px] rounded-[2rem] overflow-hidden',
+        'relative isolate pointer-events-none overflow-hidden rounded-[2rem]',
         className
       )}
       {...props}>
@@ -20,13 +20,13 @@ const Phone = ({ imgSrc, className, dark = false, ...props }: PhoneProps) => {
             ? '/phone-template-dark-edges.png'
             : '/phone-template-white-edges.png'
         }
-        className='pointer-events-none z-50 select-none'
+        className='relative z-10 block w-full pointer-events-none select-none'
         alt='phone image'
       />
 
-      <div className='absolute -z-10 inset-0'>
+      <div className='absolute z-0 inset-0'>
         <img
-          className='object-cover min-w-full min-h-full'
+          className='object-cover w-full h-full'
           src={imgSrc}
           alt='overlaying phone image'
         />

@@ -1,42 +1,10 @@
 import Link from 'next/link'
-import MaxWidthWrapper from './MaxWidthWrapper'
+import { ArrowUpRight } from 'lucide-react'
+import { PORTFOLIO_URL } from '@/config/artworks'
 
-const Footer = () => {
-  return (
-    <footer className='bg-[#243F87] h-20 relative'>
-      <MaxWidthWrapper>
-        <div />
-
-        <div className='h-full flex flex-col md:flex-row md:justify-between justify-center items-center'>
-          <div className='text-center md:text-left pb-2 md:pb-0'>
-            <p className='text-sm text-white'>
-              &copy; {new Date().getFullYear()} All rights reserved
-            </p>
-          </div>
-
-          <div className='flex items-center justify-center'>
-            <div className='flex space-x-8'>
-              <Link
-                href='#'
-                className='text-sm text-white hover:text-gray-200'>
-                Terms
-              </Link>
-              <Link
-                href='#'
-                className='text-sm text-white hover:text-gray-200'>
-                Privacy Policy
-              </Link>
-              <Link
-                href='#'
-                className='text-sm text-white hover:text-gray-200'>
-                Cookie Policy
-              </Link>
-            </div>
-          </div>
-        </div>
-      </MaxWidthWrapper>
-    </footer>
-  )
+export default function Footer() {
+  return <footer className='art-footer'><div className='art-container'>
+    <div className='footer-top'><Link href='/' className='art-wordmark'><img src='/bsmalogo.png' alt='BSMA art home' width='160' height='62' /></Link><p>Art by BSMA. A case made yours.</p><a href='https://www.instagram.com/bsmadnan/' target='_blank' rel='noreferrer'>Instagram <ArrowUpRight size={15} /></a></div>
+    <div className='footer-bottom'><span>© {new Date().getFullYear()} BSMA Case</span><nav aria-label='Footer'><Link href='/gallery'>The gallery</Link><Link href='/configure/upload'>Create a case</Link><a href={PORTFOLIO_URL} target='_blank' rel='noreferrer'>Original portfolio ↗</a></nav><span></span></div>
+  </div></footer>
 }
-
-export default Footer

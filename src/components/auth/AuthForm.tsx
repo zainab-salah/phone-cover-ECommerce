@@ -67,7 +67,7 @@ export default function AuthForm({ mode, callbackUrl, googleEnabled }: AuthFormP
   return (
     <main className='mx-auto flex min-h-[calc(100vh-3.5rem)] w-full max-w-md flex-col justify-center px-6 py-12 text-white'>
       <h1 className='text-3xl font-bold'>{isRegistration ? 'Create your account' : 'Welcome back'}</h1>
-      <p className='mt-2 text-zinc-300'>
+      <p className='mt-2 text-muted-foreground'>
         {isRegistration ? 'Save your designs and check out when you are ready.' : 'Sign in to continue your order.'}
       </p>
 
@@ -75,18 +75,18 @@ export default function AuthForm({ mode, callbackUrl, googleEnabled }: AuthFormP
         {isRegistration ? (
           <label className='block'>
             <span className='text-sm'>Name</span>
-            <input {...form.register('name')} className='mt-1 w-full rounded-md border border-zinc-500 bg-white px-3 py-2 text-black' />
+            <input {...form.register('name')} className='mt-1 w-full rounded-md border border-input bg-card px-3 py-2 text-foreground' />
             {form.formState.errors.name ? <p className='mt-1 text-sm text-red-300'>{form.formState.errors.name.message}</p> : null}
           </label>
         ) : null}
         <label className='block'>
           <span className='text-sm'>Email</span>
-          <input {...form.register('email')} type='email' className='mt-1 w-full rounded-md border border-zinc-500 bg-white px-3 py-2 text-black' />
+          <input {...form.register('email')} type='email' className='mt-1 w-full rounded-md border border-input bg-card px-3 py-2 text-foreground' />
           {form.formState.errors.email ? <p className='mt-1 text-sm text-red-300'>{form.formState.errors.email.message}</p> : null}
         </label>
         <label className='block'>
           <span className='text-sm'>Password</span>
-          <input {...form.register('password')} type='password' className='mt-1 w-full rounded-md border border-zinc-500 bg-white px-3 py-2 text-black' />
+          <input {...form.register('password')} type='password' className='mt-1 w-full rounded-md border border-input bg-card px-3 py-2 text-foreground' />
           {form.formState.errors.password ? <p className='mt-1 text-sm text-red-300'>{form.formState.errors.password.message}</p> : null}
         </label>
         {form.formState.errors.root ? <p className='text-sm text-red-300'>{form.formState.errors.root.message}</p> : null}
@@ -96,12 +96,12 @@ export default function AuthForm({ mode, callbackUrl, googleEnabled }: AuthFormP
       </form>
 
       {googleEnabled ? (
-        <Button variant='outline' className='mt-4 w-full text-black' onClick={() => signIn('google', { callbackUrl })}>
+        <Button variant='outline' className='mt-4 w-full text-foreground' onClick={() => signIn('google', { callbackUrl })}>
           Continue with Google
         </Button>
       ) : null}
 
-      <p className='mt-6 text-sm text-zinc-300'>
+      <p className='mt-6 text-sm text-muted-foreground'>
         {isRegistration ? 'Already have an account?' : 'New here?'}{' '}
         <Link className='font-semibold text-white underline' href={`${isRegistration ? '/login' : '/register'}?callbackUrl=${encodeURIComponent(callbackUrl)}`}>
           {isRegistration ? 'Sign in' : 'Create an account'}

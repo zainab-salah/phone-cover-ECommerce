@@ -102,19 +102,19 @@ const DesignPreview = ({
         </div>
 
         <div className='sm:col-span-12 md:col-span-9 text-base'>
-          <div className='grid grid-cols-1 gap-y-8 border-b border-gray-200 py-8 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10'>
+          <div className='grid grid-cols-1 gap-y-8 border-b border-border py-8 sm:grid-cols-2 sm:gap-x-6 sm:py-6 md:py-10'>
             <div>
               <p className='font-medium text-white'>Highlights</p>
-              <ol className='mt-3 text-zinc-400 list-disc list-inside'>
+              <ol className='mt-3 text-muted-foreground list-disc list-inside'>
                 <li>Wireless charging compatible</li>
                 <li>TPU shock absorption</li>
                 <li>Packaging made from recycled materials</li>
-                <li>5 year print warranty</li>
+                <li>Printed with your chosen design</li>
               </ol>
             </div>
             <div>
               <p className='font-medium text-white'>Materials</p>
-              <ol className='mt-3 text-zinc-400 list-disc list-inside'>
+              <ol className='mt-3 text-muted-foreground list-disc list-inside'>
                 <li>High-quality, durable material</li>
                 <li>Scratch- and fingerprint resistant coating</li>
               </ol>
@@ -122,19 +122,19 @@ const DesignPreview = ({
           </div>
 
           <div className='mt-8'>
-            <div className='bg-gray-50 p-6 sm:rounded-lg sm:p-8'>
+            <div className='bg-card p-6 sm:rounded-lg sm:p-8'>
               <div className='flow-root text-sm'>
                 <div className='flex items-center justify-between py-1 mt-2'>
-                  <p className='text-gray-600'>Base price</p>
-                  <p className='font-medium text-gray-900'>
+                  <p className='text-muted-foreground'>Base price</p>
+                  <p className='font-medium text-foreground'>
                     {formatPrice(BASE_PRICE / 100)}
                   </p>
                 </div>
 
                 {finish === 'textured' ? (
                   <div className='flex items-center justify-between py-1 mt-2'>
-                    <p className='text-gray-600'>Textured finish</p>
-                    <p className='font-medium text-gray-900'>
+                    <p className='text-muted-foreground'>Textured finish</p>
+                    <p className='font-medium text-foreground'>
                       {formatPrice(PRODUCT_PRICES.finish.textured / 100)}
                     </p>
                   </div>
@@ -142,18 +142,18 @@ const DesignPreview = ({
 
                 {material === 'polycarbonate' ? (
                   <div className='flex items-center justify-between py-1 mt-2'>
-                    <p className='text-gray-600'>Soft polycarbonate material</p>
-                    <p className='font-medium text-gray-900'>
+                    <p className='text-muted-foreground'>Soft polycarbonate material</p>
+                    <p className='font-medium text-foreground'>
                       {formatPrice(PRODUCT_PRICES.material.polycarbonate / 100)}
                     </p>
                   </div>
                 ) : null}
 
-                <div className='my-2 h-px bg-gray-200' />
+                <div className='my-2 h-px bg-border' />
 
                 <div className='flex items-center justify-between py-2'>
-                  <p className='font-semibold text-gray-900'>Order total</p>
-                  <p className='font-semibold text-gray-900'>
+                  <p className='font-semibold text-foreground'>Order total</p>
+                  <p className='font-semibold text-foreground'>
                     {formatPrice(totalPrice / 100)}
                   </p>
                 </div>

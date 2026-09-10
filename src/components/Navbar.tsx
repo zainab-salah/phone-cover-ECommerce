@@ -1,93 +1,13 @@
 import Link from 'next/link'
-import MaxWidthWrapper from './MaxWidthWrapper'
-import { buttonVariants } from './ui/button'
-import { ArrowRight } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { getAuthSession } from '@/auth'
 
-const Navbar = async () => {
-  const session = await getAuthSession()
-  const user = session?.user
-
-  const isAdmin = user?.email === process.env.ADMIN_EMAIL
-
-  return (
-    <nav className='sticky z-[100] h-14 inset-x-0 top-0 w-full   bg-primary backdrop-blur-lg transition-all'>
-      <MaxWidthWrapper>
-        <div className='flex h-14 items-center justify-between  '>
-          <Link href='/' className='flex z-40 font-semibold'>
-            {/* case<span className='text-green-600'>cobra</span> */}
-            <img src="/bsmalogo.png"
-              className="h-full w-full"
-            alt="bsma logo" />
-          </Link>
-
-          <div className='h-full flex items-center space-x-4'>
-            {user ? (
-              <>
-                <Link
-                  href='/api/auth/signout'
-                  className={buttonVariants({
-                    size: 'sm',
-                    variant: 'ghost',
-                  })}>
-                  Sign out
-                </Link>
-                <Link
-                  href='/dashboard'
-                  className={buttonVariants({
-                    size: 'sm',
-                    variant: 'ghost',
-                  })}>
-                  {isAdmin ? 'Dashboard ✨' : 'My cases'}
-                </Link>
-                <Link
-                  href='/configure/upload'
-                  className={buttonVariants({
-                    size: 'sm',
-                    className: 'hidden sm:flex items-center gap-1',
-                  })}>
-                  Create case
-                  <ArrowRight className='ml-1.5 h-5 w-5' />
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link
-                  href='/register'
-                  className={buttonVariants({
-                    size: 'sm',
-                    variant: 'ghost',
-                  })}>
-                  Sign up
-                </Link>
-
-                <Link
-                  href='/login'
-                  className={buttonVariants({
-                    size: 'sm',
-                    variant: 'ghost',
-                  })}>
-                  Login
-                </Link>
-
-                <div className='h-8 w-px bg-zinc-200 hidden sm:block' />
-
-                <Link
-                  href='/configure/upload'
-                  className={buttonVariants({
-                    size: 'sm',
-                    className: 'hidden sm:flex items-center gap-1',
-                  })}>
-                  Create case
-                  <ArrowRight className='ml-1.5 h-5 w-5' />
-                </Link>
-              </>
-            )}
-          </div>
-        </div>
-      </MaxWidthWrapper>
-    </nav>
-  )
+export default async function Navbar() {
+  const user = (await getAuthSession())?.user
+  const isAdmin = Boolean(user?.email && user.email === process.env.ADMIN_EMAIL)
+  return <header className='art-header'><div className='art-container nav-inner'>
+    <Link href='/' className='art-wordmark' aria-label='BSMA Case home'><img src='/bsmalogo.png' alt='BSMA art' width='160' height='62' /></Link>
+    <nav className='main-nav' aria-label='Main navigation'><Link href='/gallery'>The gallery</Link><Link href='/#the-cases'>The cases</Link><Link href='/#the-studio'>The studio</Link></nav>
+    <div className='account-nav'>{user ? <><Link href='/dashboard'>{isAdmin ? 'Dashboard' : 'My cases'}</Link><Link href='/api/auth/signout' className='signout-link'>Sign out</Link></> : <Link href='/login'>Sign in</Link>}<Link className='nav-create' href='/configure/upload'>Create a case <ArrowUpRight size={16} /></Link></div>
+  </div></header>
 }
-
-export default Navbar
