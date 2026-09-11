@@ -58,7 +58,7 @@ const Page = () => {
   return (
     <div
       className={cn(
-        "relative h-full flex-1 my-16 w-full rounded-xl bg-primarydark p-2 ring-1 ring-inset ring-gold lg:rounded-2xl flex justify-center flex-col items-center",
+        "relative h-full flex-1 my-16 w-full rounded-xl bg-primarydark/50 p-2 ring-1 ring-inset ring-gold lg:rounded-2xl flex justify-center flex-col items-center",
         {
           "ring-blue-900/25 bg-blue-900/10": isDragOver,
         }

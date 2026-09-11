@@ -29,7 +29,7 @@ const Steps = () => {
   const pathname = usePathname()
 
   return (
-    <ol className='  bg-primarydark text-white lg:flex lg:border-l lg:border-r lg:border-border'>
+    <ol className='  bg-primarydark/60 text-white lg:flex lg:border-l lg:border-r lg:border-border'>
       {STEPS.map((step, i) => {
         const isCurrent = pathname.endsWith(step.url)
         const isCompleted = STEPS.slice(i + 1).some((step) =>
